@@ -1,0 +1,31 @@
+body {
+    font-family: Arial;
+    padding-top: 100px;
+}
+.navbar-default {
+    background-color: #ffffcc;
+        
+}
+
+footer {
+    margin-top: 40px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    border-top: 1px solid #ededed;
+    color: #A9A9A9;
+}
+
+img{
+    height: 200px;
+}
+.navbar-default .navbar-brand {
+ color: #0059b3;
+}
+
+.icon-bar {
+    background-color: #a3a375;
+}
+
+.accountform {
+    padding-top: 20px;
+}
