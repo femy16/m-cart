@@ -14,8 +14,6 @@ def product_details(request,id):
 def product_add(request):
     if request.method=="POST":
          form = ProductAdd_Form(request.POST,request.FILES)
-        #  post=form.save(commit=False)
-        #  post.author=request.user
          form.save()
          return redirect(product_list)
     else:

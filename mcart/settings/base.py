@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['m-cart-femystephen.c9users.io','project4-m-cart.herokuapp.com'
 # Application definition
 
 INSTALLED_APPS = [
+    'storages',
     'django_forms_bootstrap',
     'accounts',
     'products',
