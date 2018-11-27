@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <img src="{{MEDIA_URL}}{{product.image}}">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <!--<div class="thumbnail">-->
+                
+                <h5>{{product.name}}
+                </h5>
+                <p><h4>{{product.brand}}</h4></p>
+                <hr>
+                <h4>€{{product.price}}</h4>
+                <hr>
+                <p>{{product.description}}</p>
+                <hr>
+                <form method="POST" action="#">
+                    {% csrf_token %}
+                    <div class="btn-group">
+    <button type="button" class="btn btn-info btn-circle">S</button>
+    <button type="button" class="btn btn-info btn-circle">M</button>
+    <button type="button" class="btn btn-info btn-circle">L</button>
+    <button type="button" class="btn btn-info btn-circle">XL</button>
+  </div><br>
+  <hr>
+                   <p> Qty<input type="number" name="quantity" id="quantity" value="1" /></p>
+                    <input type="hidden" name="product" value='{{product.id}}' />
+                    <input class="btn btn-primary" type="submit" value="Add to cart" /> {% if user.is_authenticated %}
+                    <a href="#" class="btn btn-primary">Add a Review</a> {% endif %}
+                </form>
+            <!--</div>-->
+        </div>
+
+    </div>
+</div>
+
+<div>
+    <h3>Reviews</h3>
+    {% for r in product.reviews.all%}
+
+    <p>{{r.title}}</p>
+    <p>{{r.content}}</p>
+
+    {% endfor%}
+
+</div>
+
+{% endblock content %}
