@@ -1,9 +1,10 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} 
+{% block content %}
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-4 col-lg-4 col-md-4">
-            <div class="thumbnail">
+        <div class="col-sm-5 col-lg-5 col-md-5">
+            <div class="thumbnail imgcontainer">
                 <img src="{{MEDIA_URL}}{{product.image}}">
             </div>
         </div>
@@ -18,19 +19,20 @@
                 <hr>
                 <p>{{product.description}}</p>
                 <hr>
-                <form method="POST" action="#">
+                <form method="POST" action="{%url 'add_to_bag'%}">
                     {% csrf_token %}
                     <div class="btn-group">
-    <button type="button" class="btn btn-info btn-circle">S</button>
-    <button type="button" class="btn btn-info btn-circle">M</button>
-    <button type="button" class="btn btn-info btn-circle">L</button>
-    <button type="button" class="btn btn-info btn-circle">XL</button>
+    <button type="button" class="btn btn-info btn-circle" name="size" value="S">S</button>
+    <button type="button" class="btn btn-info btn-circle" name="size" value="M">M</button>
+    <button type="button" class="btn btn-info btn-circle" name="size" value="L">L</button>
+    <button type="button" class="btn btn-info btn-circle" name="size" value="XL">XL</button>
   </div><br>
   <hr>
-                   <p> Qty<input type="number" name="quantity" id="quantity" value="1" /></p>
+                   <p> Qty<input type="number" name="quantity" id="quantity" value="1" /></p><br>
+                   <hr>
                     <input type="hidden" name="product" value='{{product.id}}' />
-                    <input class="btn btn-primary" type="submit" value="Add to cart" /> {% if user.is_authenticated %}
-                    <a href="#" class="btn btn-primary">Add a Review</a> {% endif %}
+                    <input class="btn btn-primary" type="submit" value="Add to bag" /> 
+                    
                 </form>
             <!--</div>-->
         </div>
@@ -38,8 +40,20 @@
     </div>
 </div>
 
+
+<div class="row">
+  <div class="column">
+  {% for image in product.images.all%}
+<img src="{{MEDIA_URL}}{{image.image}}">
+{% endfor %}
+</div>
+</div>
+
 <div>
     <h3>Reviews</h3>
+    {% if user.is_authenticated %}
+                    <a href="#" class="btn btn-primary">Add a Review</a> 
+                    {% endif %}
     {% for r in product.reviews.all%}
 
     <p>{{r.title}}</p>
@@ -50,3 +64,4 @@
 </div>
 
 {% endblock content %}
+

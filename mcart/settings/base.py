@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['m-cart-femystephen.c9users.io','project4-m-cart.herokuapp.com'
 # Application definition
 
 INSTALLED_APPS = [
+    'place_order',
+    'bag',
     'storages',
     'django_forms_bootstrap',
     'accounts',
@@ -68,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'bag.contexts.items_in_bag'
             ],
         },
     },
@@ -122,3 +125,8 @@ LOGOUT_REDIRECT_URL="/"
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STRIPE_PUBLISHABLE_KEY=os.environ.get("STRIPE_PUBLISHABLE_KEY")
+STRIPE_SECRET_KEY=os.environ.get("STRIPE_SECRET_KEY")
+
+MESSAGE_STORAGE = "django.contrib.messages.storage.session.SessionStorage"

@@ -19,7 +19,7 @@ def signup(request):
             raw_password = user_form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('show_blogs')
+            return redirect('product_list')
     else:
         user_form = SignUpForm()
         profile_form=ProfileForms()

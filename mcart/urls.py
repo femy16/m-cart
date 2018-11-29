@@ -17,15 +17,22 @@ from django.contrib import admin
 from django.urls import path,include
 from accounts.views import signup,show_profile
 from products.views import product_list,product_details,product_add
+from bag.views import add_to_bag,view_bag,remove_item
+from place_order.views import place_order,submit_payment
 from django.views.static import serve
 from django.conf import settings
 urlpatterns = [
     path('media/<path:path>',serve,{'document_root':settings.MEDIA_ROOT}),
-    path('',product_list,name="home"),
+    path('',product_list,name="product_list"),
     path('admin/', admin.site.urls),
     path('accounts/',include('django.contrib.auth.urls')),
     path('accounts/signup/', signup, name='signup'),
     path('accounts/profile', show_profile, name='show_profile'),
     path('product_details/<int:id>',product_details,name='product_details'),
-    path('product_add/',product_add,name='product_add')
+    path('product_add/',product_add,name='product_add'),
+    path('bag/add',add_to_bag,name='add_to_bag'),
+    path('bag/view_bag',view_bag,name='view_bag'),
+    path('bag/remove,<int:id>',remove_item,name='remove_item'),
+    path('placeorder/',place_order,name='place_order'),
+    path('placeorder/pay',submit_payment,name='submit_payment'),
 ]

@@ -4,7 +4,9 @@ from .forms import ProductAdd_Form
 # Create your views here.
 def product_list(request):
     product=Product.objects.all()
-    return render(request,"products/product_list.html",{'product':product})
+    user=request.user
+    # return render(request,"products/product_list.html")
+    return render(request,"products/product_list.html",{'product':product,'user':user})
     
 def product_details(request,id):
     product=Product.objects.get(pk=id)
