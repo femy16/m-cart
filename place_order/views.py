@@ -5,7 +5,7 @@ from .models import OrderLineItem
 from django.conf import settings
 import stripe 
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
 # Create your views here.
@@ -36,7 +36,7 @@ def get_bag_item_and_total(bag):
     return {'bag_items': bag_items,'grd_total':grd_total}  
     
 
-
+@login_required
 def place_order(request):
    
     bag = request.session.get('bag', {})

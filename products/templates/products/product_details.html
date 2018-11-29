@@ -1,5 +1,4 @@
-{% extends "base.html" %} 
-{% block content %}
+{% extends "base.html" %} {% load bootstrap_tags%} {% block content %}
 
 <div class="container-fluid">
     <div class="row">
@@ -10,30 +9,32 @@
         </div>
         <div class="col-sm-6">
             <!--<div class="thumbnail">-->
-                
-                <h5>{{product.name}}
-                </h5>
-                <p><h4>{{product.brand}}</h4></p>
+
+            <h5>{{product.name}}
+            </h5>
+            <p>
+                <h4>{{product.brand}}</h4>
+            </p>
+            <hr>
+            <h4>€{{product.price}}</h4>
+            <hr>
+            <p>{{product.description}}</p>
+            <hr>
+            <form method="POST" action="{%url 'add_to_bag'%}">
+                {% csrf_token %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-info btn-circle" name="size" value="S">S</button>
+                    <button type="button" class="btn btn-info btn-circle" name="size" value="M">M</button>
+                    <button type="button" class="btn btn-info btn-circle" name="size" value="L">L</button>
+                    <button type="button" class="btn btn-info btn-circle" name="size" value="XL">XL</button>
+                </div><br>
                 <hr>
-                <h4>€{{product.price}}</h4>
+                <p> Qty<input type="number" name="quantity" id="quantity" value="1" /></p><br>
                 <hr>
-                <p>{{product.description}}</p>
-                <hr>
-                <form method="POST" action="{%url 'add_to_bag'%}">
-                    {% csrf_token %}
-                    <div class="btn-group">
-    <button type="button" class="btn btn-info btn-circle" name="size" value="S">S</button>
-    <button type="button" class="btn btn-info btn-circle" name="size" value="M">M</button>
-    <button type="button" class="btn btn-info btn-circle" name="size" value="L">L</button>
-    <button type="button" class="btn btn-info btn-circle" name="size" value="XL">XL</button>
-  </div><br>
-  <hr>
-                   <p> Qty<input type="number" name="quantity" id="quantity" value="1" /></p><br>
-                   <hr>
-                    <input type="hidden" name="product" value='{{product.id}}' />
-                    <input class="btn btn-primary" type="submit" value="Add to bag" /> 
-                    
-                </form>
+                <input type="hidden" name="product" value='{{product.id}}' />
+                <input class="btn btn-primary" type="submit" value="Add to bag" />
+
+            </form>
             <!--</div>-->
         </div>
 
@@ -42,26 +43,40 @@
 
 
 <div class="row">
-  <div class="column">
-  {% for image in product.images.all%}
-<img src="{{MEDIA_URL}}{{image.image}}">
-{% endfor %}
-</div>
+    <div class="column">
+        {% for image in product.images.all%}
+        <img src="{{MEDIA_URL}}{{image.image}}"> {% endfor %}
+    </div>
 </div>
 
 <div>
     <h3>Reviews</h3>
-    {% if user.is_authenticated %}
-                    <a href="#" class="btn btn-primary">Add a Review</a> 
-                    {% endif %}
-    {% for r in product.reviews.all%}
-
+    <hr> {% for r in product.reviews.all%}
+    <p>{{r.created_date}}</p>
     <p>{{r.title}}</p>
     <p>{{r.content}}</p>
 
     {% endfor%}
+    <hr>
+{% if user.is_authenticated %} 
+    <hr>
+    <li class="dropdown">
+        <a href="#" class="dropdown-toggle nav-link hvr-underline-from-center btn btn-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Write a review<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+            <li>
+                <form method="POST" action="{% url 'make_review' product.id %}">
+                    {% csrf_token %} {{ form | as_bootstrap}}
 
+                    <input type="submit" value="Add a review" />
+                </form>
+            </li>
+        </ul>
+    </li>
+    {% endif %}
+  {% endblock content %}  
 </div>
 
-{% endblock content %}
-
+<script>
+    
+    
+</script>
