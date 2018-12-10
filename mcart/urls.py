@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from accounts.views import signup,show_profile
-from products.views import product_list,product_details,product_add,select_category
+from products.views import product_list,product_details,product_add,select_category,product_edit,product_delete
 from bag.views import add_to_bag,view_bag,remove_item
 from place_order.views import place_order,submit_payment
 from reviews.views import make_review
@@ -37,5 +37,8 @@ urlpatterns = [
     path('placeorder/',place_order,name='place_order'),
     path('placeorder/pay',submit_payment,name='submit_payment'),
     path('product_details/reviews/<int:id>',make_review,name='make_review'),
-    path('product/category/<int:id>',select_category,name='select_category')
+    path('product/category/<int:id>',select_category,name='select_category'),
+    path('product_edit/<int:id>',product_edit,name='product_edit'),
+    path('product_delete/<int:id>',product_delete,name='product_delete')
+    
 ]

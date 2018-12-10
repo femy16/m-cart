@@ -14,25 +14,27 @@ def get_bag_item_and_total(bag):
     
     grd_total=0
     bag_items = []
-    for product_id, quantity in bag.items():
+    for product_id, sizes in bag.items():
         
         product = get_object_or_404(Product, pk=product_id)
-        grd_total+=product.price * quantity
+        for size,quantity in sizes.items():
+        
         # print(quantity)
     
-        bag_items.append({
-            'id': product.id,
-            'name': product.name,
-            'brand': product.brand,
-            'sku': product.sku,
-            'description': product.description,
-            'image': product.image,
-            'price': product.price,
-            'stock': product.stock,
-            'quantity': quantity,
-            'total': product.price * quantity,
-            
-        })    
+            bag_items.append({
+                'id': product.id,
+                'name': product.name,
+                'brand': product.brand,
+                'sku': product.sku,
+                'description': product.description,
+                'image': product.image,
+                'price': product.price,
+                'stock': product.stock,
+                'quantity': quantity,
+                'total': product.price * quantity,
+                
+            }) 
+            grd_total+=product.price * quantity
     return {'bag_items': bag_items,'grd_total':grd_total}  
     
 
@@ -59,12 +61,14 @@ def submit_payment(request):
          #Saves the order to the DB
         order = form.save()
         bag = request.session.get('bag', {})
-        for product_id, quantity in bag.items():
-            line_item = OrderLineItem()
-            line_item.product_id = product_id
-            line_item.quantity = quantity
-            line_item.order = order
-            line_item.save()
+        for product_id, sizes in bag.items():
+            for size, quantity in sizes.items():
+                line_item = OrderLineItem()
+                line_item.product_id = product_id
+                line_item.size=size
+                line_item.quantity = quantity
+                line_item.order = order
+                line_item.save()
         
         # Grab the money and run
         total = bag_item_and_total['grd_total']

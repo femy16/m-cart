@@ -32,7 +32,7 @@
        {% for item in bag_items %}
        
         <tr>
-            <td><img width="150" height="75" src="{{ MEDIA_URL }}{{ item.image}}"/></td>    
+            <td><img class="img_bag" width="150" height="75" src="{{ MEDIA_URL }}{{ item.image}}"/></td>    
             <td>{{ item.name }}</td>    
             <td>{{ item.quantity }}</td>    
             <td>€{{ item.price }}</td>

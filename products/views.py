@@ -24,6 +24,26 @@ def product_add(request):
         form=ProductAdd_Form()
         return render(request,"products/product_add.html",{'form':form})
         
+def product_edit(request,id):
+    product=Product.objects.get(pk=id)
+    if request.method=="POST":
+         form = ProductAdd_Form(request.POST,request.FILES, instance=product)
+         form.save()
+         return redirect("/product_details/{0}".format(id))
+    else:
+        form=ProductAdd_Form(instance=product)
+        return render(request,"products/product_add.html",{'form':form})
+        
+def product_delete(request,id):
+    
+    Product.objects.filter(id=id).delete()
+    return redirect(product_list)
+         
+         
+    
+        
+        
+        
 def select_category(request,id):
     
     product=Product.objects.filter(productcategories_id=str(id))
