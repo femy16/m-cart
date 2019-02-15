@@ -52,7 +52,7 @@
                     
                        
                     {% if user.is_authenticated %}
-                    <li><a href="{% url 'show_profile'%}"><i class="fa fa-user"></i>{{user}}</a></li>
+                    <li><a href="#"><i class="fa fa-user"></i>{{user}}</a></li>
                     <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
                     {% if perms.product.can_add_product%}
                     <li><a href="{% url 'product_add' %}"><i class="fa fa-sign-out"></i> Add </a></li>

@@ -1,12 +1,18 @@
-{% extends 'base.html' %}
-{% load bootstrap_tags%}
-{% block content %}
-  <h2>Sign up</h2>
+{% extends 'base.html' %} {% load bootstrap_tags%} {% block content %}
+
+<div class="container signup">
+  <div class="row">
+    <div class="col">
   <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ user_form | as_bootstrap }}
-    {{ profile_form | as_bootstrap  }}
-    
-    <button type="submit">Sign up</button>
+    <div class="signupcontainer">
+      <h2>Signup with M Cart</h2>
+      
+      {% csrf_token %} {{ user_form | as_bootstrap }} {{ profile_form | as_bootstrap }}
+<p>Image is optional</p>
+      <button type="submit">Sign up</button>
+    </div>
   </form>
+</div>
+  </div>
+</div>
 {% endblock %}

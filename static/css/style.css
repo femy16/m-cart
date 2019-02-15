@@ -412,3 +412,20 @@ img.hover-shadow {
 .dropdown:hover .dropdown-menu {
   display: block;
 }
+/****************************************************************************/
+.signupcontainer {
+  padding: 36px;
+}
+.signup{
+  background-color: #ffccff;
+  font-family: 'Josefin Sans', sans-serif;
+  width: 500px;
+ 
+}
+.signup button{
+  background-color: #ff0066;
+  color: black;
+  font-weight: bold;
+}
+
+
