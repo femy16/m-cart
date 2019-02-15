@@ -3,6 +3,9 @@ from .models import Product
 from .forms import ProductAdd_Form
 from reviews.forms import ReviewForm
 # Create your views here.
+
+def home_page(request):
+    return render(request,"products/home.html")
 def product_list(request):
     product=Product.objects.all()
     user=request.user
@@ -39,11 +42,6 @@ def product_delete(request,id):
     Product.objects.filter(id=id).delete()
     return redirect(product_list)
          
-         
-    
-        
-        
-        
 def select_category(request,id):
     
     product=Product.objects.filter(productcategories_id=str(id))

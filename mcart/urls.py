@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from accounts.views import signup,show_profile
-from products.views import product_list,product_details,product_add,select_category,product_edit,product_delete
+from products.views import product_list,product_details,product_add,select_category,product_edit,product_delete,home_page
 from bag.views import add_to_bag,view_bag,remove_item
 from place_order.views import place_order,submit_payment
 from reviews.views import make_review
@@ -24,7 +24,7 @@ from django.views.static import serve
 from django.conf import settings
 urlpatterns = [
     path('media/<path:path>',serve,{'document_root':settings.MEDIA_ROOT}),
-    path('',product_list,name="product_list"),
+    path('',home_page,name="home_page"),
     path('admin/', admin.site.urls),
     path('accounts/',include('django.contrib.auth.urls')),
     path('accounts/signup/', signup, name='signup'),

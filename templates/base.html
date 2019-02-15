@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="https://bootswatch.com/3/sandstone/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
-    <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock head_style %}
-    {% block head_js %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}"> {% endblock head_style %} {% block head_js %}
+    <link rel="stylesheet" href="{% static 'css/hover.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Hind+Madurai|Josefin+Sans|Merienda" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
@@ -22,52 +23,66 @@
 
 <body>
     <!-- Fixed masthead -->
-    <nav class="navbar navbar-masthead navbar-default navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+    <nav class="navbar navbar-masthead navbar-default navbar-fixed-top navbar-expand-md">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">M-Cart</a>
-            </div>
+            <a class="navbar-brand" href="/"><img src="{% static 'images/logo.png' %}"></img>M-Cart</a>
+        </div>
 
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle nav-link hvr-underline-from-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'select_category' '1'%}">sweaters</a></li>
-                            <li><a href="{% url 'select_category' '2'%}">sweatshirts</a></li>
-                            <li><a href="{% url 'select_category' '3'%}">Jackets</a></li>
-                            <li><a href="{% url 'select_category' '4'%}">Coats</a></li>
-                        </ul>
-                    </li>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle nav-link hvr-underline-from-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'select_category' '1'%}">sweaters</a></li>
+                        <li><a href="{% url 'select_category' '2'%}">sweatshirts</a></li>
+                        <li><a href="{% url 'select_category' '3'%}">Jackets</a></li>
+                        <li><a href="{% url 'select_category' '4'%}">Coats</a></li>
+                    </ul>
+                </li>
+
+                
+                    
+                       
                     {% if user.is_authenticated %}
                     <li><a href="{% url 'show_profile'%}"><i class="fa fa-user"></i>{{user}}</a></li>
                     <li><a href="{% url 'logout' %}"><i class="fa fa-sign-out"></i> Log Out</a></li>
                     {% if perms.product.can_add_product%}
                     <li><a href="{% url 'product_add' %}"><i class="fa fa-sign-out"></i> Add </a></li>
-                    {% endif %} {% else %}
+                    {% endif %}
+                    
+                    {% else %}
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle nav-link hvr-underline-from-center" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i><span class="caret"></span></a>
+               
+                <ul class="dropdown-menu">
                     <li><a href="{% url 'signup' %}"><i class="fa fa-user-plus"></i> Sign up</a></li>
                     <li><a href="{% url 'login' %}"><i class="fa fa-sign-in"></i> Log In</a></li>
-
+</ul>
+               </li>
                     {% endif %}
-
-                    <li><a href="{% url 'view_bag' %}"><i class="fas fa-shopping-bag"></i> Bag  
+                   
+                
+               
+                <li><a href="{% url 'view_bag' %}"><i class="fas fa-shopping-bag"></i> Bag  
                      
                      {% if items_in_bag > 0 %}
                             <label class="badge badge-light">{{items_in_bag}}</label>
                      {% endif %}
                         </a>
-                    </li>
-                </ul>
-            </div>
+                </li>
+            </ul>
+
         </div>
     </nav>
-
+    <div class="spacer"></div>
     {% if messages %}
     <div class="alert alert-success">
         <div class="messages">
@@ -76,19 +91,36 @@
     </div>
     {% endif %}
 
-    <div class="container">
-        <br>
-        <div class="row">
+    
             {% block content %} {% endblock %}
-        </div>
-    </div>
+        
     <footer>
         <div class="container">
-            <p>Made by Code Institute FEMY</p>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="footheadr">M-Cart</p>
+                    <p class="footpara">ALL THE LATEST TRENDS UNDER ONE ROOF</p>
+<p class="footpara">Haven’t we all wondered where we could get our favourite celebrity or fashion icons’ latest looks? Sure, they have an entourage of personal stylists, makeup artists and hair dressers to look the way they do but with M Cart, you will understand that you do not have to spend a fortune to look great.</p>
+                </div>
+                <div class="col-sm-4">
+                    <p class="footpara">KEEP IN TOUCH</p>
+                     <a class="footer_social hvr-pop" href="https://www.facebook.com/myntra" target="_blank"><i class="fab fa-facebook-square"></i></a>
+                     <a class="footer_social hvr-pop" href="https://twitter.com/myntra" target="_blank"><i class="fab fa-twitter-square"></i></a>
+                     <a class="footer_social hvr-pop" href="https://www.youtube.com/user/myntradotcom" target="_blank"> <i class="fab fa-instagram"></i><br /></a>
+                     <a class="footer_social hvr-pop" href="https://www.instagram.com/myntra" target="_blank"> <i class="fab fa-youtube"></i></i><br /></a>
+                
+                </div>
+                <div class="col-sm-4">
+                
+                <i class="fas fa-check-square footicon"><span class="footpara">100% ORIGINAL guarantee <br>for all products at M Cart</span></i><p></p>
+                <i class="fas fa-sync footicon"><span class="footpara">Return within 30days of <br>receiving your order</span></i><p></p>
+                <i class="fas fa-truck footicon"><span class="footpara">Get free delivery for every<br> order above 30 Euros</span></i>
+                
+                </div>
+            </div>
         </div>
     </footer>
-    
+
 </body>
 
 </html>
-

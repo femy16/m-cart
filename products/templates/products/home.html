@@ -1,0 +1,122 @@
+{%extends "base.html" %} {% load staticfiles%} {% block content%}
+<div class="container">
+    <div class="row">
+
+        <div class=" col homepic">
+            <img src="{% static 'images/snowman.jpg' %}"></img>
+            <div class="top-left">For the Season <br>of Love</div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col lines">
+            <p>GET CAUGHT UP IN THESE <span class="redlines">Categories</span></p>
+
+        </div>
+    </div>
+</div>
+
+<div class="container ">
+    <div class="row cat-row">
+        <div class="col-sm-6 cat categories hvr-shrink">
+            <a href="{% url 'select_category' '3'%}"><img src="{% static 'images/jacket.jpeg' %}"></img></a>
+        </div>
+        <div class="col-sm-6 cat hvr-shrink">
+            <a href="{% url 'select_category' '1'%}"><img src="{% static 'images/sweaters.jpeg' %}"></img></a>
+        </div>
+    </div>
+    <div class="row cat-row">
+        <div class="col-sm-6 cat hvr-shrink">
+            <a href="{% url 'select_category' '4'%}"><img src="{% static 'images/coat.jpeg' %}"></img></a>
+        </div>
+        <div class="col-sm-6 cat hvr-shrink">
+            <a href="{% url 'select_category' '2'%}"> <img src="{% static 'images/sweatshirt.jpeg' %}"></img></a>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col lines">
+            <p>PUTTIN' YOUR LOVE ON TOP WITH <span class="redlines">Fave Brands</span></p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row product_logo_row">
+        <div class="col-sm-3">
+            <a class="card hvr-ripple-out product_logo" href="https://www.devacurl.com/" target="_blank">
+		 <img src="{% static 'images/asics.jpg' %}"></img>
+	</a>
+        </div>
+
+
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.wella.com/professional/countryselector" target="_blank"> 
+                              <img src="{% static 'images/biba.png' %}"></img>
+                              </a>
+
+        </div>
+
+
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.wella.com/professional/countryselector" target="_blank"> 
+                              <img src="{% static 'images/columb.jpeg' %}"></img>
+                              </a>
+
+        </div>
+
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.wella.com/professional/countryselector" target="_blank"> 
+                              <img src="{% static 'images/dorothy-perkins.jpg' %}"></img>
+                              </a>
+
+        </div>
+    </div>
+    <div class="row product_logo_row">
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.goldwell.us/" target="_blank">  
+                              <img src="{% static 'images/gap.jpg' %}"></img>
+                              </a>
+        </div>
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.goldwell.us/" target="_blank">  
+                              <img src="{% static 'images/mango.jpg' %}"></img>
+                              </a>
+        </div>
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.goldwell.us/" target="_blank">  
+                              <img src="{% static 'images/nike.jpg' %}"></img>
+                              </a>
+        </div>
+        <div class="col-sm-3">
+
+            <a class="card hvr-ripple-out product_logo " href="https://www.goldwell.us/" target="_blank">  
+                              <img src="{% static 'images/puma.jpg' %}"></img>
+                              </a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col lines">
+            <p>"Cloths are like a good meal,a good movie, great pieces of music."</p>
+            <p><i>Michael Kors</i></p>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

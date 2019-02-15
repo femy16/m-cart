@@ -1,21 +1,168 @@
 body {
-    font-family: Arial;
-    padding-top: 100px;
+    
+    /*padding-top: 100px;*/
 }
+.navbar-default .navbar-brand {
+    color: black;
+    font-weight: bolder;
+}
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: blue;
+    
+}
+.navbar-default .navbar-nav>li>a {
+    color:black;
+    font-size: 15px;
+  font-family: 'Hind Madurai', sans-serif;
+    
+}
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-nav>li>a:focus {
+    color: blue;
+   
+}
+.dropdown-menu>li>a{
+  color:black;
+  background-color: white;
+}
+
+.navbar-brand>img {
+  padding-left: 200px;
+    display: inline-block;
+}
+.nav{
+  padding: 10px 10px; 
+  padding-left: 200px;
+}
+
+.navbar-brand {
+  color:black;
+  font-family: 'Hind Madurai', sans-serif;
+    float: left;
+     height: 70px; 
+     padding: 10px 10px; 
+    font-size: 25px;
+    line-height: 20px;
+      display: inline-block;
+}
+.navbar-collapse{
+      background-color: white;
+}
+.spacer {
+
+        height: 85px;
+    }
 .navbar-default {
-    background-color: #ffffcc;
+    background-color: transparent;
     position: fixed;
+    border-color: transparent;
         
 }
 
+.logo{
+  display: inline-block;
+}
+.homepic img{
+  max-width: 100%;
+}
+.homepic{
+  position: relative;
+  text-align: center;
+  color: white;
+}
+.top-left {
+  position: absolute;
+  top: 150px;
+  left: 40px;
+  font-family: 'Merienda', cursive;
+  color: red;
+  font-size: 40px;
+}
+.lines{
+  text-align: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: 20px;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.redlines{
+  text-align: center;
+  padding-top: 30px;
+  font-size: 25px;
+  font-family: 'Merienda', cursive;
+  color: red;
+}
+.categories{
+  position: relative;
+  /*text-align: center;*/
+  
+  box-sizing: border-box;
+}
+.cat-row{
+  background-color: #ff5050;
+  padding-top: 20px;
+  
+}
+.cat{
+  
+  /*float: left;*/
+  /*width: 33.33%;*/
+  padding-left:15px;
+  padding-bottom: 30px;
+      text-align: center;
+ 
+}
+.cat img{
+   max-width: 100%;
+   
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+.product_logo_row .col-sm-3 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 20Px;
+    margin-bottom: 30px
+}
+
+.product_logo img {
+    max-width: 100%;
+}
 footer {
     margin-top: 40px;
     padding-top: 40px;
     padding-bottom: 40px;
     border-top: 1px solid #ededed;
     color: #A9A9A9;
+    font-family: 'Josefin Sans', sans-serif;
 }
-
+.footer_social{
+  font-size: 30px;
+  padding-left: 10px;
+  color:black;
+}
+.footpara{
+  font-size: 15px;
+  font-weight: 100;
+  color: black;
+  font-family: 'Josefin Sans', sans-serif;
+}
+.footheadr{
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
+}
+.footicon{
+  font-size: 30px;
+  color: black;
+  
+}
 .img_shows{
     height: 200px;
 }
@@ -23,9 +170,7 @@ footer {
   height: 100px;
   width: 100px;
 }
-.navbar-default .navbar-brand {
- color: #0059b3;
-}
+
 
 .icon-bar {
     background-color: #a3a375;
@@ -249,4 +394,21 @@ img.hover-shadow {
 .size{
   height: 100%;
   width: 100%;
+}
+/******************************************/
+.dropdown-menu{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropdown-menu a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
