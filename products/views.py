@@ -22,7 +22,7 @@ def product_add(request):
     if request.method=="POST":
          form = ProductAdd_Form(request.POST,request.FILES)
          form.save()
-         return redirect(product_list)
+         return redirect(home_page)
     else:
         form=ProductAdd_Form()
         return render(request,"products/product_add.html",{'form':form})
@@ -40,7 +40,7 @@ def product_edit(request,id):
 def product_delete(request,id):
     
     Product.objects.filter(id=id).delete()
-    return redirect(product_list)
+    return redirect(home_page)
          
 def select_category(request,id):
     

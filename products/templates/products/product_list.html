@@ -3,24 +3,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class=" container container-fluid">
     <div class="row">
     {% for p in product %}
-                    <div class="col-sm-4 col-lg-4 col-md-4">
-                        <div class="thumbnail">
-                            <img src="{{MEDIA_URL}}{{p.image}}">
+                    <div class="col-sm-4 prod">
+                        <div class="thumbnail hvr-glow">
+                            <a href="{% url 'product_details' p.id %}"><img src="{{MEDIA_URL}}{{p.image}}"></a>
                             <div class="caption">
                                 <h4 class="pull-right">€{{p.price}}</h4>
                                 <h4><a href="{% url 'product_details' p.id %}">{{p.name}}</a>
                                 </h4>
                                 <p>{{p.brand}}</p>
                                 
-                                <form method="POST" action="{%url 'add_to_bag'%}">
-                                    {% csrf_token %}
-                                    <input type="number" name="quantity" value="1"/>
-                                    <input type="hidden" name="product" value='{{p.id}}'/>
-                                    <input class="btn btn-primary" type="submit" value="Add to bag"/>
-                                </form>
+                                
                                 
                             </div>
                         </div>

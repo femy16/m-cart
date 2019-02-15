@@ -1,261 +1,274 @@
 {% extends "base.html" %} {% load bootstrap_tags%}{% load staticfiles%} {% block content %}
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-5 col-lg-5 col-md-5">
-            <div class="thumbnail imgcontainer">
-                <img src="{{MEDIA_URL}}{{product.image}}">
+<div class="container">
+    <div class=" productdetails container-fluid">
+        <div class="row">
+            <div class="col-sm-5">
+                <div class="thumbnail imgcontainer">
+                    <img src="{{MEDIA_URL}}{{product.image}}">
+                </div>
             </div>
-        </div>
-        <div class="col-sm-6">
-            <!--<div class="thumbnail">-->
+            <div class="col-sm-6">
+                <!--<div class="thumbnail">-->
 
-            <h5>{{product.name}}
-            </h5>
-            <p>
-                <h4>{{product.brand}}</h4>
-            </p>
-            <hr>
-            <h4>€{{product.price}}</h4>
-            <hr>
-            <p>{{product.description}}</p>
-            <hr>
-            <form method="POST" action="{%url 'add_to_bag'%}">
-                <input type="hidden" name="size" value="" /> {% csrf_token %}
-                <div class="btn-group">
+                <p>
+                    <h3>{{product.brand}}</h3>
+                </p>
+                <h4>{{product.name}}
+                </h4>
+
+                <hr>
+                <h4>€{{product.price}}</h4>
+                <hr>
+
+                <form method="POST" action="{%url 'add_to_bag'%}">
+                    <input type="hidden" name="size" value="" /> {% csrf_token %}
+                    <div class="btn-group">
+                        <div class="row">
+                            <div class="col-sm-7">
+
+                                <button type="button" class="btn btn-info btn-circle" onclick="set_size('S')" name="size_S" value="S">S</button>
+                                <button type="button" class="btn btn-info btn-circle" onclick="set_size('M')" name="size_M" value="M">M</button>
+                                <button type="button" class="btn btn-info btn-circle" onclick="set_size('L')" name="size_L" value="L">L</button>
+                                <button type="button" class="btn btn-info btn-circle" onclick="set_size('XL')" name="size_XL" value="XL">XL</button>
+                            </div>
+                            <div class="col-sm-3">
+                                <a class="btn btn-primary" onclick="openModal_size()">sizeChart</a>
+
+                            </div>
+                        </div>
+                        <!--***********************************************-->
+                        <div id="myModal_size" class="modal_size">
+
+                            <div class="modal-content_size">
+                                
+                                <div>
+                                    <p class="sizepara">Size Options</p>
+                                    <span class="close_size cursor" onclick="closeModal_size()">&times;</span>
+                                </div>
+                                <hr>
+                                <div>
+                                    <table class="sizeChartWeb-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="sizeChartWeb-cell">Size</th>
+                                                <th class="sizeChartWeb-cell">To Fit Bust (in)</th>
+                                                <th class="sizeChartWeb-cell">Front Length (in)</th>
+                                                <th class="sizeChartWeb-cell">To Fit Waist (in)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="sizeChartWeb-row">
+                                                <td class="sizeChartWeb-cell">S</td>
+                                                <td class="sizeChartWeb-cell">34.0</td>
+                                                <td class="sizeChartWeb-cell">23.0</td>
+                                                <td class="sizeChartWeb-cell">28.0</td>
+                                            </tr>
+                                            <tr class="sizeChartWeb-row">
+                                                <td class="sizeChartWeb-cell">M</td>
+                                                <td class="sizeChartWeb-cell">36.0</td>
+                                                <td class="sizeChartWeb-cell">23.5</td>
+                                                <td class="sizeChartWeb-cell">30.0</td>
+                                            </tr>
+                                            <tr class="sizeChartWeb-row">
+                                                <td class="sizeChartWeb-cell">L</td>
+                                                <td class="sizeChartWeb-cell">38.0</td>
+                                                <td class="sizeChartWeb-cell">24.0</td>
+                                                <td class="sizeChartWeb-cell">32.0</td>
+                                            </tr>
+                                            <tr class="sizeChartWeb-row">
+                                                <td class="sizeChartWeb-cell">XL</td>
+                                                <td class="sizeChartWeb-cell">40.0</td>
+                                                <td class="sizeChartWeb-cell">24.5</td>
+                                                <td class="sizeChartWeb-cell">34.0</td>
+                                            </tr>
+                                            <tr class="sizeChartWeb-row">
+                                                <td class="sizeChartWeb-cell">XXL</td>
+                                                <td class="sizeChartWeb-cell">42.0</td>
+                                                <td class="sizeChartWeb-cell">25.0</td>
+                                                <td class="sizeChartWeb-cell">36.0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="scaleAndUnits-unitText">* To-Fit Denotes Body Measurements in Inches</div>
+
+                                <div class="size">
+                                    <img src="{% static 'images/size.jpg' %}"></img>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <!--************************************************************************-->
+
+                    </div><br>
+                    <hr>
                     <div class="row">
-                        <div class="col">
-                            
-                            <button type="button" class="btn btn-info btn-circle" onclick="set_size('S')" name="size_S" value="S">S</button>
-                            <button type="button" class="btn btn-info btn-circle" onclick="set_size('M')" name="size_M" value="M">M</button>
-                            <button type="button" class="btn btn-info btn-circle" onclick="set_size('L')" name="size_L" value="L">L</button>
-                            <button type="button" class="btn btn-info btn-circle" onclick="set_size('XL')" name="size_XL" value="XL">XL</button>
+                        <div class="col-sm-3">
+                            <p class="pdetails"> Qty<input type="number" name="quantity" id="quantity" value="1" /></p>
                         </div>
-                        <div class="column">
-                            <a class="btn btn-primary" onclick="openModal_size()">sizeChart</a>
-
+                        <div class="col-sm-3">
+                            <input type="hidden" name="product" value='{{product.id}}' />
+                            <input class="btn btn-primary" type="submit" value="Add to bag" />
                         </div>
                     </div>
-                    <!--***********************************************-->
-                    <div id="myModal_size" class="modal_size">
-                        
-                        <div class="modal-content_size">
-                            <div>
-                            <p>Size Options</p>
-                            <span class="close_size cursor" onclick="closeModal_size()()">&times;</span>
-</div>
-<hr>
-<div>
-                            <table class="sizeChartWeb-table">
-                                <thead>
-                                    <tr>
-                                        <th class="sizeChartWeb-cell">Size</th>
-                                        <th class="sizeChartWeb-cell">To Fit Bust (in)</th>
-                                        <th class="sizeChartWeb-cell">Front Length (in)</th>
-                                        <th class="sizeChartWeb-cell">To Fit Waist (in)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="sizeChartWeb-row">
-                                        <td class="sizeChartWeb-cell">S</td>
-                                        <td class="sizeChartWeb-cell">34.0</td>
-                                        <td class="sizeChartWeb-cell">23.0</td>
-                                        <td class="sizeChartWeb-cell">28.0</td>
-                                    </tr>
-                                    <tr class="sizeChartWeb-row">
-                                        <td class="sizeChartWeb-cell">M</td>
-                                        <td class="sizeChartWeb-cell">36.0</td>
-                                        <td class="sizeChartWeb-cell">23.5</td>
-                                        <td class="sizeChartWeb-cell">30.0</td>
-                                    </tr>
-                                    <tr class="sizeChartWeb-row">
-                                        <td class="sizeChartWeb-cell">L</td>
-                                        <td class="sizeChartWeb-cell">38.0</td>
-                                        <td class="sizeChartWeb-cell">24.0</td>
-                                        <td class="sizeChartWeb-cell">32.0</td>
-                                    </tr>
-                                    <tr class="sizeChartWeb-row">
-                                        <td class="sizeChartWeb-cell">XL</td>
-                                        <td class="sizeChartWeb-cell">40.0</td>
-                                        <td class="sizeChartWeb-cell">24.5</td>
-                                        <td class="sizeChartWeb-cell">34.0</td>
-                                    </tr>
-                                    <tr class="sizeChartWeb-row">
-                                        <td class="sizeChartWeb-cell">XXL</td>
-                                        <td class="sizeChartWeb-cell">42.0</td>
-                                        <td class="sizeChartWeb-cell">25.0</td>
-                                        <td class="sizeChartWeb-cell">36.0</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-</div>
-<div class="scaleAndUnits-unitText">* To-Fit Denotes Body Measurements in Inches</div>
-
-<div class="size">
-     <img src="{% static 'images/size-chart_Image.png' %}"></img>
-</div>
-
-                        </div>
-                        
-                    </div>
-                    <!--************************************************************************-->
-
-                </div><br>
+                </form>
                 <hr>
-                <p> Qty<input type="number" name="quantity" id="quantity" value="1" /></p><br>
+                <p class="pdetails">Product Details</p>
+                <p>{{product.description}}</p>
                 <hr>
-                <input type="hidden" name="product" value='{{product.id}}' />
-                <input class="btn btn-primary" type="submit" value="Add to bag" />
 
-            </form>
-            <!--</div>-->
-            <hr>
-            <div class=row>
-                {% if perms.product.can_change_product%}
-                <a href="{% url 'product_edit' product.id %}" class="btn btn-primary">Edit Product</a> {% endif%} {% if perms.product.can_delete_product%}
-                <a href="{% url 'product_delete' product.id %}" class="btn btn-primary">Delete Product</a> {% endif%}
+                <div class=row>
+                    {% if perms.product.can_change_product%}
+                    <a href="{% url 'product_edit' product.id %}" class="btn btn-primary">Edit Product</a> {% endif%} {% if perms.product.can_delete_product%}
+                    <a href="{% url 'product_delete' product.id %}" class="btn btn-primary">Delete Product</a> {% endif%}
+                </div>
+            </div>
+
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-sm">
+
+                {% for image in product.images.all%}
+
+                <img class="img_shows" src="{{MEDIA_URL}}{{image.image}}" onclick="openModal();currentSlide({{image.id}})" class="hover-shadow"> {% endfor %}
             </div>
         </div>
+        <div id="myModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="imgslide">
+                {% for image in product.images.all%}
 
-    </div>
-</div>
-
-
-<div class="row">
-    <div class="column">
-
-        {% for image in product.images.all%}
-
-        <img class="img_shows"src="{{MEDIA_URL}}{{image.image}}" onclick="openModal();currentSlide({{image.id}})" class="hover-shadow"> {% endfor %}
-    </div>
-</div>
-<div id="myModal" class="modal">
-    <span class="close cursor" onclick="closeModal()">&times;</span>
-    <div class="">
-        {% for image in product.images.all%}
-
-        <div class="mySlides">
+                <div class="mySlides">
 
 
-            <img src="{{MEDIA_URL}}{{image.image}} " style="width:100%">
+                    <img class="demo" src="{{MEDIA_URL}}{{image.image}} " style="width:100%">
 
+                </div>
+                {% endfor %}
+                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+            </div>
         </div>
-        {% endfor %}
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h3>Reviews</h3>
+                {% for r in product.reviews.all%}
+                <p>{{r.created_date}}</p>
+                <p>{{r.title}}</p>
+                <p>{{r.content}}</p>
 
+                {% endfor%} {% if user.is_authenticated %}
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle nav-link hvr-underline-from-center btn btn-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Write a review<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <form method="POST" action="{% url 'make_review' product.id %}">
+                                {% csrf_token %} {{ form | as_bootstrap}}
+
+                                <input type="submit" value="Add a review" />
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
-<div>
-    <h3>Reviews</h3>
-    <hr> {% for r in product.reviews.all%}
-    <p>{{r.created_date}}</p>
-    <p>{{r.title}}</p>
-    <p>{{r.content}}</p>
-
-    {% endfor%}
-    <hr> {% if user.is_authenticated %}
-    <hr>
-    <li class="dropdown">
-        <a href="#" class="dropdown-toggle nav-link hvr-underline-from-center btn btn-primary" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Write a review<span class="caret"></span></a>
-        <ul class="dropdown-menu">
-            <li>
-                <form method="POST" action="{% url 'make_review' product.id %}">
-                    {% csrf_token %} {{ form | as_bootstrap}}
-
-                    <input type="submit" value="Add a review" />
-                </form>
-            </li>
-        </ul>
-    </li>
-    {% endif %}
-
-
-    <script>
-        function set_size(size) {
-            document.getElementsByName('size')[0].setAttribute("value", size);
-            if (size == 'S') {
-                document.getElementsByName('size_S')[0].setAttribute("style", "background-color: red;");
-                document.getElementsByName('size_M')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_L')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_XL')[0].setAttribute("style", "background-color: #29abe0;");
-            }
-            else if (size == 'M') {
-                document.getElementsByName('size_S')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_M')[0].setAttribute("style", "background-color: red;");
-                document.getElementsByName('size_L')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_XL')[0].setAttribute("style", "background-color: #29abe0;");
-
-            }
-            else if (size == 'L') {
-                document.getElementsByName('size_S')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_M')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_L')[0].setAttribute("style", "background-color: red;");
-                document.getElementsByName('size_XL')[0].setAttribute("style", "background-color: #29abe0;");
-
-            }
-            else if (size == 'XL') {
-                document.getElementsByName('size_S')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_M')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_L')[0].setAttribute("style", "background-color: #29abe0;");
-                document.getElementsByName('size_XL')[0].setAttribute("style", "background-color:red;");
-
-            }
+<script>
+    function set_size(size) {
+        document.getElementsByName('size')[0].setAttribute("value", size);
+        if (size == 'S') {
+            document.getElementsByName('size_S')[0].setAttribute("style", "background-color: red;");
+            document.getElementsByName('size_M')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_L')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_XL')[0].setAttribute("style", "background-color: #29abe0;");
+        }
+        else if (size == 'M') {
+            document.getElementsByName('size_S')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_M')[0].setAttribute("style", "background-color: red;");
+            document.getElementsByName('size_L')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_XL')[0].setAttribute("style", "background-color: #29abe0;");
 
         }
-        //**************************************************************************************************
-        function openModal() {
-            document.getElementById('myModal').style.display = "block";
+        else if (size == 'L') {
+            document.getElementsByName('size_S')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_M')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_L')[0].setAttribute("style", "background-color: red;");
+            document.getElementsByName('size_XL')[0].setAttribute("style", "background-color: #29abe0;");
+
+        }
+        else if (size == 'XL') {
+            document.getElementsByName('size_S')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_M')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_L')[0].setAttribute("style", "background-color: #29abe0;");
+            document.getElementsByName('size_XL')[0].setAttribute("style", "background-color:red;");
+
         }
 
-        function closeModal() {
-            document.getElementById('myModal').style.display = "none";
+    }
+    //**************************************************************************************************
+    function openModal() {
+        document.getElementById('myModal').style.display = "block";
+    }
+
+    function closeModal() {
+        document.getElementById('myModal').style.display = "none";
+    }
+
+    var slideIndex = 1;
+    // showSlides(slideIndex);
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
-
-        var slideIndex = 1;
-        // showSlides(slideIndex);
-
-        function plusSlides(n) {
-            showSlides(slideIndex += n);
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
         }
-
-        function currentSlide(n) {
-
-            showSlides(slideIndex = n);
-        }
-
-        function showSlides(n) {
-            var i;
-            var slides = document.getElementsByClassName("mySlides");
-            var dots = document.getElementsByClassName("demo");
-            var captionText = document.getElementById("caption");
-            if (n > slides.length) { slideIndex = 1 }
-            if (n < 1) { slideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            dots[slideIndex - 1].className += " active";
-            captionText.innerHTML = dots[slideIndex - 1].alt;
-        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+       
+    }
 
 
-        // *******************************************************
+    // *******************************************************
 
-        // Open the Modal
-        function openModal_size() {
-            alert("open");
-            document.getElementById('myModal_size').style.display = "block";
-        }
+    // Open the Modal
+    function openModal_size() {
+        
+        document.getElementById('myModal_size').style.display = "block";
+    }
 
-        // Close the Modal
-        function closeModal_size() {
-            document.getElementById('myModal_size').style.display = "none";
-        }
-        // *******************************************************
-    </script>
-</div>
+    // Close the Modal
+    function closeModal_size() {
+        document.getElementById('myModal_size').style.display = "none";
+    }
+    // *******************************************************
+</script>
+
 {% endblock content %}
