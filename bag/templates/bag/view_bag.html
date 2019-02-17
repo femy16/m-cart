@@ -1,60 +1,56 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} {% block content %}
+<div class="container bag">
+    <div class="row">
+        <div class="col-sm">
 
-{% block content %}
+            {% if items_in_bag > 0 %}
 
-{% if items_in_bag > 0 %}
+            <p class="baghead">My Shopping Bag (items {{items_in_bag}}) &nbsp &nbsp<span> Total: €{{grd_total}}</span></p>
+        </div>
+    </div>
+    <hr> {% for item in bag_items %}
+    <div class="row pdetails_bag">
 
-<h3>My Shopping Bag (items {{items_in_bag}})</h3>
+        <div class="col-sm-3">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th></th>    
-            <th>Product</th>    
-            <th>Quantity</th>  
-            <th>Size</th>
-            <th>Price</th>
-            <th>Total</th> 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        
-        
-       {% for item in bag_items %}
-       
-        <tr>
-            <td><img class="img_bag" width="150" height="75" src="{{ MEDIA_URL }}{{ item.image}}"/></td>    
-            <td>{{ item.name }}</td>    
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.size }}</td>
-            <td>€{{ item.price }}</td>
-            <td>€{{ item.total }}</td>
-            <td><form method="post" action="{% url 'remove_item' item.id%}">
+
+            <img class="img_bag" src="{{ MEDIA_URL }}{{ item.image}}" />
+        </div>
+        <div class="col-sm-6 bag_details">
+            <p>{{ item.name }}</p>
+            <p>sold by : {{ item.brand }}</p>
+            <p>Size : {{ item.size }} &nbsp &nbsp Qty : {{ item.quantity }}</p>
+            <p>Price : €{{ item.price }} </p>
+
+        </div>
+        <div class="col-sm-3 bag_details">
+            <p>Total : €{{ item.total }} </p><br>
+            <form method="post" action="{% url 'remove_item' item.id%}">
                 {% csrf_token %}
-                <input type="hidden" name="size" value="{{item.size}}"/>
-                <input type="submit" class="btn btn-success" value="Remove"/>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-        <tr>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td><strong>Total:</strong></td>
-           <td><strong>{{grd_total}}</strong></td>
-           <td></td>
-       </tr>
-    </tbody>
-</table>
+                <input type="hidden" name="size" value="{{item.size}}" />
+                <input type="submit" class="btn btn-primary" value="Remove" />
+            </form>
+        </div>
 
-<a href="{% url 'place_order' %}" class="btn btn-success" role="button">Place Order</a>
-{% else %}
 
-<p>Your Bag is empty</p>
 
-{% endif %}
+    </div>
+    <hr> {% endfor %}
+
+    <div class="row">
+        <div class="col-sm">
+
+            <a href="{% url 'place_order' %}" class="btn btn-primary placeorder" role="button">Place Order</a>
+        </div>
+    </div>
+    {% else %}
+    <div class="row">
+        <div class="col-sm">
+            <p class="baghead">Your Bag is empty !</p>
+        </div>
+    </div>
+    {% endif %}
+</div>
 
 
 {% endblock %}

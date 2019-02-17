@@ -193,8 +193,8 @@ footer {
 }
 
 .img_bag {
-  height: 100px;
-  width: 100px;
+  height: 200px;
+  width: 150px;
 }
 
 
@@ -554,4 +554,31 @@ table{
   color: black;
   font-weight: bold;
   background-color: #ff0066;
+}
+.baghead{
+  font-size: 25px;
+  font-weight: bold;
+  font-family: 'Josefin Sans', sans-serif;
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+}
+.placeorder{
+  float: right;
+}
+.bag{
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: bold;
+  width: 800px;
+}
+.pdetails_bag{
+  text-align: center;
+}
+.bag_details{
+  padding-top: 25px;
+}
+.placeorderform{
+  background-color: #ffccff;
+  font-family: 'Josefin Sans', sans-serif;
+  width: 800px;
 }

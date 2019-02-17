@@ -1,86 +1,82 @@
-{% extends 'base.html' %}
-{% load static from staticfiles%}
-{% load bootstrap_tags%}
+{% extends 'base.html' %} {% load static from staticfiles%} {% load bootstrap_tags%} {% block head_js %} {{ block.super }}
+<script src="https://js.stripe.com/v2/" type="text/javascript"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    Stripe.publishableKey = '{{ publishable }}';
+    //]]>
+</script>
+<script type="text/javascript" src="{% static 'place_order/stripe.js' %}"></script>
+{% endblock %} {% block content %}
+<div class="container bag">
+    <div class="row">
+        <div class="col-sm">
+            <p class="baghead">Place Order</p>
+        </div>
+    </div>
+    {% for item in bag_items %}
+    <div class="row pdetails_bag">
 
-{% block head_js %}
-   {{ block.super }}
-  <script src="https://js.stripe.com/v2/" type="text/javascript"></script>
-  <script type="text/javascript">
-      //<![CDATA[
-      Stripe.publishableKey = '{{ publishable }}';
-      //]]>
-  </script>
-  <script type="text/javascript" src="{% static 'place_order/stripe.js' %}"></script>
-{% endblock %}
+        <div class="col-sm-3">
 
-{% block content %}
-    <h1>checkout</h1>
-    <table class="table">
-    <thead>
-        <tr>
-            <th></th>    
-            <th>Product</th>    
-            <th>Quantity</th>    
-            <th>Price</th>
-            <th>Total</th> 
-            
-        </tr>
-    </thead>
-    <tbody>
-        
-        
-       {% for item in bag_items %}
-       
-        <tr>
-            <td><img class="img_bag" width="150" height="75" src="{{ MEDIA_URL }}{{ item.image}}"/></td>    
-            <td>{{ item.name }}</td>    
-            <td>{{ item.quantity }}</td>    
-            <td>€{{ item.price }}</td>
-            <td>€{{ item.total }}</td>
-           <td><form method="post" action="{% url 'remove_item' item.id%}">
+
+            <img class="img_bag" src="{{ MEDIA_URL }}{{ item.image}}" />
+        </div>
+        <div class="col-sm-6 bag_details">
+            <p>{{ item.name }}</p>
+            <p>sold by : {{ item.brand }}</p>
+            <p>Size : {{ item.size }} &nbsp &nbsp Qty : {{ item.quantity }}</p>
+            <p>Price : €{{ item.price }} </p>
+
+        </div>
+        <div class="col-sm-3 bag_details">
+            <p>Total : €{{ item.total }} </p><br>
+            <form method="post" action="{% url 'remove_item' item.id%}">
                 {% csrf_token %}
-                <input type="submit" class="btn btn-success" value="Remove"/>
-                </form>
-            </td>
-            
-        </tr>
-        {% endfor %}
-        <tr>
-           <td></td>
-           <td></td>
-           <td></td>
-           <td><strong>Total:</strong></td>
-           <td><strong>{{grd_total}}</strong></td>
-          
-       </tr>
-    </tbody>
-</table>
+                <input type="hidden" name="size" value="{{item.size}}" />
+                <input type="submit" class="btn btn-primary" value="Remove" />
+            </form>
+        </div>
 
-<hr>
-<form role="form" method="post" id="payment-form" action="{% url 'submit_payment'%}">
-        
-    <legend>Payment Details</legend>
 
-    <div id="credit-card-errors" style="display:none">
-      <div class="alert-message block-message error" id="stripe-error-message"></div>
+
+    </div>
+    <hr> {% endfor %}
+    <div class="row">
+        <div class="col-sm">
+
+            <p class="placeorder">Total: €{{grd_total}}</p>
+        </div>
     </div>
 
-    <div class="form-group col-md-6">
-        {{ order_form|as_bootstrap }}
+    <hr>
+    <div class="row placeorderform">
+        <div class="col">
+            <form role="form" method="post" id="payment-form" action="{% url 'submit_payment'%}">
+
+                <legend>Payment Details</legend>
+
+                <div id="credit-card-errors" style="display:none">
+                    <div class="alert-message block-message error" id="stripe-error-message"></div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    {{ order_form|as_bootstrap }}
+                </div>
+
+                <div class="form-group col-md-6">
+                    {{ payment_form|as_bootstrap }}
+                </div>
+
+                {% csrf_token %}
+
+
+
+                <div class="form-group col-sm placeorder">
+                    <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
+                </div>
+
+            </form>
+        </div>
     </div>
-
-    <div class="form-group col-md-6">
-        {{ payment_form|as_bootstrap }}
-    </div>
-
-    {% csrf_token %}
-    
-    
-    
-    <div class="form-group col-md-12">
-      <input class="btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
-    </div>
-
-    </form>
-
+</div>
 {% endblock %}
