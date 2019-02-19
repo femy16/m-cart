@@ -6,11 +6,11 @@
     <div class="col-sm">
     <form method="POST" enctype="multipart/form-data">
         <div class="ProdFormcontainer">
-            <h2>Add a Product</h2>
+            <h2>Product Details</h2>
         {% csrf_token %}
         {{ form | as_bootstrap}}
         
-        <button type="submit">Add</button>
+        <button type="submit">Submit</button>
         </div>
     </form>
     </div>
