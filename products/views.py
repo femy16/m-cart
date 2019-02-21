@@ -49,3 +49,7 @@ def select_category(request,id):
     # return render(request,"products/product_list.html")
     return render(request,"products/product_list.html",{'product':product,'user':user})
     
+def home_brand(request,cat):
+    product=Product.objects.filter(brand=str(cat))
+    user=request.user
+    return render(request,"products/product_list.html",{'product':product,'user':user})
