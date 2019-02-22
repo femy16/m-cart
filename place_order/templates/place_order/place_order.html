@@ -8,11 +8,13 @@
 <script type="text/javascript" src="{% static 'place_order/stripe.js' %}"></script>
 {% endblock %} {% block content %}
 <div class="container bag">
+    {% if items_in_bag > 0 %}
     <div class="row">
         <div class="col-sm">
             <p class="baghead">Place Order</p>
         </div>
     </div>
+    
     {% for item in bag_items %}
     <div class="row pdetails_bag">
 
@@ -30,7 +32,7 @@
         </div>
         <div class="col-sm-3 bag_details">
             <p>Total : €{{ item.total }} </p><br>
-            <form method="post" action="{% url 'remove_item' item.id%}">
+            <form method="post" action="{% url 'remove_item_order' item.id%}">
                 {% csrf_token %}
                 <input type="hidden" name="size" value="{{item.size}}" />
                 <input type="submit" class="btn btn-primary" value="Remove" />
@@ -78,5 +80,12 @@
             </form>
         </div>
     </div>
+    {% else %}
+    <div class="row" id="main1">
+        <div class="col-sm">
+            <p class="baghead">Your Bag is empty ! Please continue shopping</p>
+        </div>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

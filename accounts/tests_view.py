@@ -6,6 +6,17 @@ from .forms import UserCreationForm
 # Create your tests here.
 class TestAccountsViews(TestCase):
     
+    
+     def test_get_signup_page(self):
+        page = self.client.get("/accounts/signup/")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "registration/signup.html")
+        
+     def test_get_Login_page(self):
+        page = self.client.get("/accounts/login/")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "registration/login.html")
+        
      def test_user_can_register(self):
         response = self.client.post("/accounts/signup/", {
             'username': 'test',
@@ -38,8 +49,8 @@ class TestAccountsViews(TestCase):
         form_params={
             'username': 'test2',
             'email': 'test@email.com',
-            'password1': 'Madtotest',
-            'password2': 'Madetotest'
+            'password1': 'Fortes123',
+            'password2': 'Fortest123'
         }
         response = self.client.post("/accounts/signup", form_params)
         form = UserCreationForm(form_params)

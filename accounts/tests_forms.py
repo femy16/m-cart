@@ -1,5 +1,5 @@
 from django.test import TestCase
-from .forms import UserCreationForm, AuthenticationForm
+from .forms import UserCreationForm
 from django.contrib.auth import login
 from django.contrib.auth.models import User
 

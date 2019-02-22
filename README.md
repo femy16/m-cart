@@ -51,3 +51,78 @@ The backend was done first, with the styling added after. As styling was almost 
 
 One the styling was looking the way I wanted, I started working on the responsiveness of the website in tablet and then in mobile and completed one by one.
 
+### Testing
+
+#### Automated Testing
+
+All automated testing was done using Travis-CI. There is automated testing done for all apps with views, models, and forms (where applicable). The testing currently provides 78% coverage
+for the app. There is quite a bit of repetition in the testing.
+
+Coverage was tested by running the following in the command line: 
+```
+$ sudo pip3 install coverage 
+$ coverage run manage.py test (app name)
+$ coverage html
+```
+A htmlcov folder will be created now. By running 'htmlcov/index.html' we will be able to see the coverage.
+
+#### Manual Testing
+
+Manual tests were also done to ensure links,form submissions,Models, stripe payments etc are working correctly.
+
+Manual testing was done to ensure:
+
++ The site works as intended.
++ Logging in and out and registering works as intended.
++ The place order page is not accessible if no items are in the cart.
++ Only admin can edit delete and add a product.
++ Reviwes can only be written if the user is logged in.
++ Models applied for size Chart and image slideshow is working correctly.
+
+##### Links
+
+All the links included in the website have been tested and they are all working.
+
+##### Effects
+
+Hover effects on icons, links, images and cards have been tested and they all have a hover effect working as expected.
+
+##### Responsive 
+
+The website have been tested in different viewports and it is responsve.
+
+### Features
+
++ Users can easily register, log in and log out.
++ A user must be logged in to review and to order a product.
++ Users can easily add items to a bag.
++ The image for the bag in the navbar will display the amount of items currently in the bag.
++ Users can enter address and card information for making purchases.
++ While making payment the order details are available on screen and user can remove the item if they wish.
++ Payment processing via stripe.
++ Users can easily navigate through the products via brand and categories.
++ User can select the size they needed in S, M, L, XL format.
++ A size Chart is avilable as model which displays size in inches.
++ More images of the Products are displayed as Model slide shows.
++ Reviews about the product can be viewed, User can review if logged in.
+
+#### Features Left to Implement
++ Enable users to view previous purchases.
++ Enable users to create an address book so they do not have to enter address information every time they purchase items.
++ Enable users to edit the product requirement in bag and in place order sections.
++ Sending email confirmation upon succesful purchases.
+ 
+### Deployment 
+
+The M - cart site is hosted on heroku.
+Static assets are hosted on Amazon S3.
+
+### Credits 
+
+##### Media 
+
+All images and contents have been obtained through different searches through [Google](www.google.com) and [Myntra](https://www.myntra.com/).
+
+##### Acknowledgements
+
+Design of the site was based on [Myntra](https://www.myntra.com/).

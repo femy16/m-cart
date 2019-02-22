@@ -2,6 +2,7 @@ from django.shortcuts import render,redirect
 from .models import Product
 from .forms import ProductAdd_Form
 from reviews.forms import ReviewForm
+from django.http import HttpResponseForbidden
 # Create your views here.
 
 def home_page(request):
@@ -19,13 +20,16 @@ def product_details(request,id):
     return render(request, "products/product_details.html",{'product':product,'form':form})
     
 def product_add(request):
-    if request.method=="POST":
-         form = ProductAdd_Form(request.POST,request.FILES)
-         form.save()
-         return redirect(home_page)
+    if (request.user.is_superuser):
+        if request.method=="POST":
+             form = ProductAdd_Form(request.POST,request.FILES)
+             form.save()
+             return redirect(home_page)
+        else:
+            form=ProductAdd_Form()
+            return render(request,"products/product_add.html",{'form':form})
     else:
-        form=ProductAdd_Form()
-        return render(request,"products/product_add.html",{'form':form})
+         return HttpResponseForbidden()
         
 def product_edit(request,id):
     product=Product.objects.get(pk=id)

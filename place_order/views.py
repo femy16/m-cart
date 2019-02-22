@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404,HttpResponse
 from products.models import Product
+from bag.views import remove_item
 from .forms import MakePaymentForm,OrderForms
 from .models import OrderLineItem
 from django.conf import settings
@@ -26,6 +27,7 @@ def get_bag_item_and_total(bag):
                 'name': product.name,
                 'brand': product.brand,
                 'sku': product.sku,
+                'size':size,
                 'description': product.description,
                 'image': product.image,
                 'price': product.price,
@@ -48,6 +50,13 @@ def place_order(request):
     context={'payment_form':payment_form,'order_form':order_form,'publishable':settings.STRIPE_PUBLISHABLE_KEY}
     context.update(bag_item_and_total)
     return render(request, "place_order/place_order.html",context)
+    
+def remove_item_order(request,id):
+    size=request.POST['size']
+    bag=request.session.get('bag',{})
+    del bag[str(id)][size]
+    request.session['bag']=bag
+    return redirect("place_order")
     
 def submit_payment(request):
     

@@ -18,7 +18,7 @@ from django.urls import path,include
 from accounts.views import signup,show_profile
 from products.views import product_list,product_details,product_add,select_category,product_edit,product_delete,home_page,home_brand
 from bag.views import add_to_bag,view_bag,remove_item
-from place_order.views import place_order,submit_payment
+from place_order.views import place_order,submit_payment,remove_item_order
 from reviews.views import make_review
 from django.views.static import serve
 from django.conf import settings
@@ -33,8 +33,9 @@ urlpatterns = [
     path('product_add/',product_add,name='product_add'),
     path('bag/add',add_to_bag,name='add_to_bag'),
     path('bag/view_bag',view_bag,name='view_bag'),
-    path('bag/remove,<int:id>',remove_item,name='remove_item'),
+    path('bag/remove/<int:id>',remove_item,name='remove_item'),
     path('placeorder/',place_order,name='place_order'),
+    path('placeorder/remove/<int:id>',remove_item_order,name='remove_item_order'),
     path('placeorder/pay',submit_payment,name='submit_payment'),
     path('product_details/reviews/<int:id>',make_review,name='make_review'),
     path('product/category/<int:id>',select_category,name='select_category'),
