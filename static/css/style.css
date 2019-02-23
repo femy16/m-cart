@@ -842,6 +842,9 @@ table {
   .placeorderform{
     width: 350px;
   }
+  .pbrand_inlist{
+    display: none;
+  }
   
 }
 

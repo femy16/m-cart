@@ -33,18 +33,23 @@ def product_add(request):
         
 def product_edit(request,id):
     product=Product.objects.get(pk=id)
-    if request.method=="POST":
-         form = ProductAdd_Form(request.POST,request.FILES, instance=product)
-         form.save()
-         return redirect("/product_details/{0}".format(id))
+    if (request.user.is_superuser):
+        if request.method=="POST":
+             form = ProductAdd_Form(request.POST,request.FILES, instance=product)
+             form.save()
+             return redirect("/product_details/{0}".format(id))
+        else:
+            form=ProductAdd_Form(instance=product)
+            return render(request,"products/product_add.html",{'form':form})
     else:
-        form=ProductAdd_Form(instance=product)
-        return render(request,"products/product_add.html",{'form':form})
+         return HttpResponseForbidden()        
         
 def product_delete(request,id):
-    
-    Product.objects.filter(id=id).delete()
-    return redirect(home_page)
+    if (request.user.is_superuser):
+        Product.objects.filter(id=id).delete()
+        return redirect(home_page)
+    else:
+         return HttpResponseForbidden()       
          
 def select_category(request,id):
     

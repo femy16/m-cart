@@ -10,7 +10,7 @@ A live demo can be found [here](https://project4-m-cart.herokuapp.com/).
 
 ### UX 
 
-Online shopping for dress is some thing very interesting to me. M cart is a shopping site for ladies winter wear. 
+Online shopping for dress is something very interesting to me. M cart is a shopping site for ladies winter clothing. 
 
 The site allows filtering of products by four categories and the brands that sell the products. The Products belongs to four main categories, Jackets, Coats, Sweaters and Sweatshirts.
 No template was used to build this site. There were some specific UX and UI designs that were taken into consideration when styling this site. 
@@ -55,8 +55,8 @@ One the styling was looking the way I wanted, I started working on the responsiv
 
 #### Automated Testing
 
-All automated testing was done using Travis-CI. There is automated testing done for all apps with views, models, and forms (where applicable). The testing currently provides 78% coverage
-for the app. There is quite a bit of repetition in the testing.
+All automated testing was done using Travis-CI. There is automated testing done for all apps with views, models, and forms (where applicable). The testing currently provides 76% coverage
+for the app. About 28 test were written, There is quite a bit of repetition in the testing.
 
 Coverage was tested by running the following in the command line: 
 ```
@@ -68,7 +68,7 @@ A htmlcov folder will be created now. By running 'htmlcov/index.html' we will be
 
 #### Manual Testing
 
-Manual tests were also done to ensure links,form submissions,Models, stripe payments etc are working correctly.
+Manual tests were also done to ensure links,form submissions,Models, stripe payments etc are working correctly. 
 
 Manual testing was done to ensure:
 
@@ -111,6 +111,7 @@ The website have been tested in different viewports and it is responsve.
 + Enable users to create an address book so they do not have to enter address information every time they purchase items.
 + Enable users to edit the product requirement in bag and in place order sections.
 + Sending email confirmation upon succesful purchases.
++ More stylings and 
  
 ### Deployment 
 

@@ -13,15 +13,19 @@ class TestProductsViews(TestCase):
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "products/home.html")
         
-    def test_get_create_Product(self):
+    def test_get_create_Product_error_if_not_authourised(self):
         page = self.client.get("/product_add/")
-        self.assertEqual(page.status_code, 200)
-        self.assertTemplateUsed(page, "products/product_add.html")
+        self.assertEqual(page.status_code, 403)
+    
+    
         
     def test_get_product_by_category(self):
         page = self.client.get("/product/category/2")
         self.assertEqual(page.status_code, 200)
         self.assertTemplateUsed(page, "products/product_list.html")
    
-        
+    def test_get_product_by_brand(self):
+        page = self.client.get("/product/brand/GAP")
+        self.assertEqual(page.status_code, 200)
+        self.assertTemplateUsed(page, "products/product_list.html")    
     
