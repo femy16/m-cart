@@ -803,17 +803,19 @@ table {
     left: 3%;
   }
   .modal{
+    padding-top: 25px;
     width: 90%;
     /*left: 3%;*/
-    height: 70%;
+    height: 60%;
   }
   .mySlides{
     padding: 3px;
     width: 85%;
   }
   .mySlides img{
-    width: 310px;
-    height: 400px;
+    padding-top: 25px;
+    width: 315px;
+    height: 365px;
     
     padding-left: 35px;
     
